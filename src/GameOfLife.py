@@ -19,8 +19,9 @@ class GameOfLife:
         self.im = plt.imshow(
             self.grid, interpolation='nearest', animated=True, cmap='Greys')
         self.ani = animation.FuncAnimation(
-            self.fig, self.update, interval=50, blit=True, frames=1000, repeat=False)
+            self.fig, self.update, interval=200, blit=True, frames=1000, repeat=False)
         plt.title('Game of Life')
+
         self.fig.axes[0].get_xaxis().set_visible(False)
         self.fig.axes[0].get_yaxis().set_visible(False)
 

@@ -4,23 +4,35 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
+
 class GameOfLife:
     width = 100
     height = 100
 
     def __init__(self, random_state=False):
-        self.grid = np.zeros((self.width, self.height))
+        self.grid = np.zeros((self.height, self.width))
         if random_state:
             self.grid = np.random.randint(2, size=(self.height, self.width))
         self.grid_next = np.zeros((self.height, self.width))
         self.fig = plt.figure()
-        self.ax = self.fig.add_subplot(1, 1, 1)
-        self.ax.set_xlim(0, self.width)
-        self.ax.set_ylim(0, self.height)
-        self.ax.set_aspect('equal')
-        self.ax.set_title('Game of Life')
-        self.im = self.ax.imshow(self.grid, interpolation='nearest', cmap='Greys')
-        self.anim = animation.FuncAnimation(self.fig, self.update, interval=100, blit=True)
+
+        self.im = plt.imshow(
+            self.grid, interpolation='nearest', animated=True, cmap='Greys')
+        self.ani = animation.FuncAnimation(
+            self.fig, self.update, interval=50, blit=True, frames=1000, repeat=False)
+        plt.title('Game of Life')
+        self.fig.axes[0].get_xaxis().set_visible(False)
+        self.fig.axes[0].get_yaxis().set_visible(False)
+
+        plt.show()
+
+        # self.ax = self.fig.add_subplot(1, 1, 1)
+        # self.ax.set_xlim(0, self.width)
+        # self.ax.set_ylim(0, self.height)
+        # self.ax.set_aspect('equal')
+        # self.ax.set_title('Game of Life')
+        # self.im = self.ax.imshow(self.grid, interpolation='nearest', cmap='Greys')
+        # self.anim = animation.FuncAnimation(self.fig, self.update, interval=100, blit=True)
 
     def update(self, i):
         self.grid_next = self.grid.copy()
@@ -55,15 +67,9 @@ class GameOfLife:
                 n += self.grid[rowNeighbor, colNeighbor]
         return n
 
-    def show(self):
-        plt.show()
-        
 
 # Main
 if __name__ == '__main__':
     game = GameOfLife(random_state=True)
-    game.show()
-    game.save('game_of_life.gif')
-    game.clear()
-
-
+    # game.save('game_of_life.gif')
+    # game.clear()

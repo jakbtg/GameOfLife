@@ -6,9 +6,10 @@ import GameOfLife
 def play():
     game = GameOfLife.GameOfLife(random_state=True)
 
+
 root = tk.Tk()
 root.title("Game of Life")
-#root.geometry("1000x700")
+# root.geometry("1000x700")
 
 canvas = tk.Canvas(root, width=1000, height=700, bg="#222222")
 canvas.pack()
@@ -19,7 +20,9 @@ canvas.pack()
 gliderButton = tk.Button(root, text="Glider", bg="white", fg="black", padx=10, pady=10)
 gliderButton.pack()
 
-playButton = tk.Button(root, text="Play", bg="white", fg="black", padx=10, pady=10, command=play)
+playButton = tk.Button(
+    root, text="Play", bg="white", fg="black", padx=10, pady=10, command=play
+)
 playButton.pack()
 
 
